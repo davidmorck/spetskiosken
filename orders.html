@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>    
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</head>
+    
+    <script>
+        
+        
+        
+    
+    </script>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
+  <a class="navbar-brand" href="index.html">Spetskiosken</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="orders.html">Beställning</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="products.html">Produkter</a>
+      </li>
+    </ul>
+  </div>
+        
+      
+</nav>
+    
+    <div class="ordertitle">
+        <h1>Lägg en beställning</h1>
+  </div>
+    
+    <div class="ordertable">
+    
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Produkt</th>
+      <th scope="col">Antal</th>
+      <th scope="col">Pris</th>
+    </tr>
+  </thead>
+  <tbody id="orderproduct">
+      <tr id="product1">
+      <th scope="row">
+        <div class="form-group">
+            <select class="form-control" id="selectproduct1" onChange="determinePrice(1)">
+            </select>
+        </div>
+      </th>
+      <td>
+        <input class="form-control" type="number" value="1" id="selectquantity1" onChange="determinePrice(1)" min="1">
+      </td>
+      <td>   
+        <p id="totalcostproduct1">
+          
+        </p>   
+      </td>
+      <td>   
+        <button type="button" class="btn btn-danger"  onclick="cannotDelete()">Ta bort</button>   
+      </td>
+      
+    </tr>
+      
+      
+  </tbody>
+</table>
+    
+    </div>
+    
+    <div class="addbuttonorder">
+        <button type='button' class='btn btn-success' id="addproduct">Lägg till en produkt</button>
+        <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#confirmmodal" id="moveon">Gå vidare</button>
+    </div>
+   
+
+
+<!-- Modal -->
+<div class="modal fade" id="confirmmodal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="orderdoneheader">Bekräfta din beställning</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="orderdonetext">
+            <div>
+                <h5>Din beställning:</h5>
+                <table class="table">
+                    <tbody id="orderreceipt">
+                    </tbody>
+                </table>
+                
+            </div>
+            <h5>
+                Vänligen ange ditt namn samt email-adress
+            </h5>
+
+             <div class="inputreceipt">   
+                <input class="form-control" type="text" placeholder="Ange ditt namn" id="inputname">  
+            </div>
+            <div class="inputreceipt">
+                <input class="form-control" type="text" placeholder="Ange din email" id="inputemail">
+           </div>
+      </div>
+      <div class="modal-footer" id="modalbuttons">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closereceipt">Stäng</button>
+        <button type="button" class="btn btn-primary" id="sendorder">Skicka beställning</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    
+</body>
+
+<script>
+    
+    var products;
+    
+    var receiptTotalCost = 0;
+    
+    var receiptProducts = "";
+    
+    var receiptQuantity = "";
+    
+        const url = "https://gg71nquqt8.execute-api.us-east-1.amazonaws.com/prod/productsLambdaReal?type=GET"; 
+            fetch(url) 
+                .then(response => response.text())
+                .then(contents => {
+                    var parse = JSON.parse(contents);
+                    var body = JSON.parse(parse.body);
+                    products = body.Items;
+                    
+                
+                products.forEach(element =>{
+            productsAppendString += "<option>" + element.productname + "</option>";
+            
+        });
+        determinePrice(1, products[0].productname);
+        $("#selectproduct1").append(productsAppendString);
+            })
+        
+        var productsAppendString = "";
+        
+        var productInt = 1;
+
+    $("#addproduct").click(function(){
+       productInt += 1;
+       $("#orderproduct").append("<tr id='product" + productInt.toString() + "'><th scope='row'><div class='form-group'><select class='form-control' id='selectproduct" + productInt.toString() + "' onchange='determinePrice(" + productInt.toString() + ")'>" + productsAppendString + "</select></div></th><td><input class='form-control' onchange='determinePrice(" + productInt.toString() + ")' type='number' min='1' value='1' id='selectquantity" + productInt.toString() + "'></td><td>   <p id='totalcostproduct" + productInt.toString() + "'></p>   </td><td>   <button type='button' class='btn btn-danger'  onclick='deleteProduct(" + productInt.toString() + ")'>Ta bort</button></td></tr>");
+        determinePrice(productInt);
+    });
+    
+    function deleteProduct(index){
+        var queryString = "#product" + index.toString();
+        $(queryString).remove();
+    }
+    
+    function cannotDelete(){
+        alert("Du kan inte ta bort denna produkt!")
+    }
+    
+    $("#moveon").click(function(){
+        for (var i = 1; i < 10; i++){
+            var queryStringProduct = "#selectproduct" + i.toString();
+            var queryStringQuantity = "#selectquantity" + i.toString();
+            var product = $(queryStringProduct).val();
+            var quantity = $(queryStringQuantity).val();
+            if (product != undefined && quantity != undefined){
+                products.forEach(element => {
+                   if (element.productname == product){
+                       receiptTotalCost += element.price * quantity;
+                   } 
+                });
+                $("#orderreceipt").append("<tr><td>" + product + ":</td><td>" + quantity.toString() + " st</td></tr>")
+                receiptProducts += "/" + product;
+                receiptQuantity += "/" + quantity.toString();
+            }
+        }
+        
+        $("#orderreceipt").append("<tr><td><b>Att betala:</b></td><td>" + receiptTotalCost.toString() + " kr</td></tr>")
+        
+        receiptProducts = receiptProducts.substring(1);
+        receiptQuantity = receiptQuantity.substring(1);
+        console.log(receiptProducts, receiptQuantity, receiptTotalCost);
+    });
+    
+    $("#sendorder").click(function(){
+         var email = $("#inputemail").val();
+         var name = $("#inputname").val();
+        
+         console.log(receiptProducts, receiptQuantity, email, name);
+         var d = new Date();
+         var day = d.getDate().toString();
+         var hour = d.getHours().toString();
+         var minute = d.getMinutes().toString();
+         var second = d.getSeconds().toString();
+         
+         var ordernumber = day + hour + minute + second;
+         console.log(ordernumber);
+        
+        var url = "https://81hj82pdmk.execute-api.us-east-1.amazonaws.com/prod/ordersLambdaReal?type=POST&ordernumber=" + ordernumber.toString() + "&productkey=" + receiptProducts.toString() + "&notes=undefined&quantity=" + receiptQuantity.toString() + "&person=" + name + "&email=" + email + "&totalcost=" + receiptTotalCost.toString();
+        
+         if (validateEmail(email) == false){
+             alert("Ange en giltig email adress.")
+         } else if (name == undefined){
+             alert("Ange ditt namn.")
+         } else {
+             fetch(url) .then(response => response.text()).then(contents => {
+                 console.log(JSON.parse(contents));
+                 
+             })
+             
+             $("#orderdoneheader").empty();
+             $("#orderdonetext").empty();
+             $("#sendorder").remove();
+             $("#modalbuttons").empty();
+             
+             $("#modalbuttons").append("<button type='button' class='btn btn-secondary' data-dismiss='modal' onclick='reload()'>Stäng</button>")
+
+             $("#orderdoneheader").append("Ditt ordernummer är #" + ordernumber.toString());
+             
+             $("#orderdonetext").append("<p>Tack " + name + " för att du handlade hos Spetskiosken. Vi har skickat ett bekräftelse-mail till " + email + ". Om du har några frågor kan du maila till abbspets@gmail.com</p>")
+                
+         };
+    });
+    
+    $("#closereceipt").click(function(){
+        $("#orderreceipt").empty();
+    });
+    
+    function reload(){
+        location.reload();
+    }
+    
+    function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+    
+    function determinePrice(index, product){
+        if (product == undefined){
+            var totalcostquery = "#totalcostproduct" + index.toString();
+            $(totalcostquery).empty();
+            var productstring = "#selectproduct" + index.toString();
+            var quantitystring = "#selectquantity" + index.toString();
+            var selectedproduct = $(productstring).val();
+            var selectedquantity = $(quantitystring).val();
+        
+            var price;
+            products.forEach(element => {
+                if (element.productname == selectedproduct){
+                    price = element.price;
+                }
+            })
+        
+            var totalcost = price * selectedquantity;
+        
+            $(totalcostquery).append("<p>" + totalcost.toString() + " kr</p>")
+        } else {
+            var totalcostquery = "#totalcostproduct" + index.toString();
+            $(totalcostquery).empty();
+            var quantitystring = "#selectquantity" + index.toString();
+            var selectedquantity = $(quantitystring).val();
+        
+            var price;
+            products.forEach(element => {
+                if (element.productname == product){
+                    price = element.price;
+                }
+            })
+        
+            var totalcost = price * selectedquantity;
+        
+            $(totalcostquery).append("<p>" + totalcost.toString() + " kr</p>")
+        }
+        
+        }
+    
+    
+    /*<tr><th scope='row'><div class='form-group'><select class='form-control'' id='selectproduct1'><option>1</option><option>2</option><option>3</option><option>4</option></select></div></th><td><input class='form-control' type='number' value='1' id='selectquantity1'></td><td>   <p id='totalcostproduct'>1 kr</p></td></tr>*/
+
+
+
+</script>
+</html>

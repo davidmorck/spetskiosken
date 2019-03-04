@@ -1,0 +1,113 @@
+.producttable {
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.producttableadmin {
+    margin-top: 5%;
+    margin-left: 33%;
+    margin-right: 70%;
+    width:30%
+}
+
+.ordertableadmin {
+    margin-top: 5%;
+    margin-left: 25%;
+    margin-right: 70%;
+    width: 50%;
+}
+
+
+.productheader {
+    margin-top: 5%;
+    text-align: center;
+        
+}
+
+.adminlogin {
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#submitadminkey {
+    margin-left: 10%;
+}
+
+#functionbuttons {
+    position: absolute;
+  bottom: 0;
+  width: 100%;
+    
+}
+
+
+
+#patchbutton {
+    margin-left:40%;
+    margin-right:1%;
+    width: 100px;
+    height: 50px;
+}
+
+#deletebutton {
+    margin-right:1%;
+    width: 100px;
+    height: 50px;
+}
+#addbutton {
+    margin-right:1%;
+    width: 100px;
+    height: 50px;
+}
+
+#orderproductbuttondiv {
+    margin-top: 6%;
+    margin-left: 42%;
+
+}
+
+.deletebuttonproductdiv {
+    width: 100%;
+}
+
+.deletebuttonproduct {
+    margin-left: 300px;
+}
+
+#addbuttondiv {
+    margin-left: 46%;
+    margin-top: 5%;
+}
+.addbuttonorder {
+    margin-left: 43%;
+    margin-top: 5%;
+}
+
+
+.ordertable {
+    margin-top:5%;
+    width: 33%;
+    margin-left: 37%;
+} 
+
+#totalcostproduct {
+    margin-top: 8%;
+}
+
+.inputreceipt {
+    margin-top: 5%
+}
+
+.ordertitle {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.mainheaderdiv {
+    width: 100%;
+    background-color: lightcyan;
+    margin-top: 4%;
+    height: 300px;
+}

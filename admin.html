@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>    
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
+  <a class="navbar-brand" href="index.html">Spetskiosken</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="orders.html">Beställning</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="products.html">Produkter</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="adminlogin.html">Admin</a>
+      </li>
+      
+    </ul>
+  </div>
+    </nav>
+    
+    
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="orderproductbuttondiv">
+            <label class="btn btn-secondary active" id="productslabel">
+                <input type="radio" name="options" id="productsbutton" autocomplete="off" checked> Produkter
+            </label>
+            <label class="btn btn-secondary" id="orderslabel">
+                <input type="radio" name="options" id="ordersbutton" autocomplete="off" checked> Beställningar
+            </label>
+        </div>
+    
+    <div id="orderproductdiv">
+        <div class='producttableadmin'>
+        <table class='table'>
+            <thead class='thead-dark'>
+                <tr>
+                    <th scope='col'>Produkt</th>
+                    <th scope='col'>Antal i lager</th>
+                    <th scope='col'>Pris per produkt</th>
+                    <th scope='col'>Beskrivning</th></tr>
+            </thead>
+            <tbody id='addProducts'>
+            </tbody>
+        </table>
+    </div>
+    
+    </div>
+    
+    
+    <div id="patchModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Patch product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Enter a new quantity for the product.</p>
+        <input type="number" name="quantity" id="inputquantity" min="0">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="savequantity" data-toggle="modal" data-target="#patchDoneModal" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+    
+  <div id="patchDoneModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Product patched</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="productPatchedReturn"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closePatched">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    <div id="addModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6>Put in values for the new product.</h6>
+        <p>Product key:</p>
+        <input type="text" id="inputproductkey">
+        <p style="margin-top:15px;">Notes:</p>
+        <input type="text" id="inputnotes">
+        <p style="margin-top:15px;">Price:</p>
+        <input type="number" id="inputprice" min="0">
+        <p style="margin-top:15px;">Product name:</p>
+        <input type="text" id="inputproductname">
+        <p style="margin-top:15px;">Quantity:</p>
+        <input type="number" id="inputantal" min="0">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="savenewproduct" data-toggle="modal" data-target="#addDoneModal" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+    
+  <div id="addDoneModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Product added</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="productAddedReturn"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeAdded">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    
+    <div id="addbuttondiv">
+        <button type='button' class='btn btn-success' onclick="addProduct()" data-toggle="modal" data-target="#addModal">Add product</button>
+    </div>
+    
+    
+</body>
+    
+    <script>
+        
+        var ordersArr = [];
+        
+        var productsArr = [];
+        
+        addProducts();
+        
+        $("#productslabel").click(function(){
+           $("#productslabel").addClass("active"); 
+           $("#orderslabel").removeClass("active");
+           showProductsAdmin();    
+        });
+        
+        $("#orderslabel").click(function(){
+           $("#orderslabel").addClass("active"); 
+           $("#productslabel").removeClass("active"); 
+           showOrdersAdmin();    
+        });
+        
+        
+        
+        function addProducts(){
+            
+            const url = "https://gg71nquqt8.execute-api.us-east-1.amazonaws.com/prod/productsLambdaReal?type=GET"; // site that doesn’t send Access-Control-*
+            fetch(url) // https://cors-anywhere.herokuapp.com/https://example.com
+                .then(response => response.text())
+                .then(contents => {
+            
+                var productParse = JSON.parse(contents);
+            
+                main((JSON.parse(productParse.body)).Items)
+        
+            })
+            /*.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))*/
+
+
+         function main(products){
+            console.log(products);
+            productInt = 0;
+            
+            function addProductToHTML(product){
+                $("#addProducts").append("<tr id=product" + productInt.toString() +"> <th scope='row''>" + product.productname + "</th><td>" + product.quantity + "</td><td>" + product.price + " kr</td><td>" + product.notes + "</td><td><button type='button' class='btn btn-danger' onclick='deleteProduct(" + productInt.toString() + ")'>Delete</button</td><td><button type='button' class='btn btn-warning' data-toggle='modal' data-target='#patchModal' onclick='patchProduct(" + productInt.toString() + ")'>Patch</button</td></tr>");
+                productsArr.push({"productkey": product.productkey, "quantity": product.quantity, "price": product.price, "notes": product.notes});
+            }
+            
+            products.forEach(element => {
+                addProductToHTML(element);
+                productInt += 1;
+            }) 
+         };
+        }
+        
+        function addOrders(){
+            const url = "https://81hj82pdmk.execute-api.us-east-1.amazonaws.com/prod/ordersLambdaReal?type=GET"; // site that doesn’t send Access-Control-*
+            fetch(url) // https://cors-anywhere.herokuapp.com/https://example.com
+                .then(response => response.text())
+                .then(contents => {
+            
+                var productParse = JSON.parse(contents);
+            
+                main((JSON.parse(productParse.body)).Items)
+        
+            })
+            /*.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))*/
+
+
+         function main(orders){
+            console.log(orders);
+            orderInt = 0;
+            
+            function addOrderToHTML(order){
+                $("#addOrders").append("<tr id=order" + orderInt.toString() + "> <th scope='row''>" + order.ordernumber + "</th><td>" + order.person + "</td><td>" +order.productkey + "</td><td>" + order.quantity + "</td><td>" + order.email + "</td><td>" + order.notes + "</td><td><button type='button' class='btn btn-danger' onclick='deleteOrder(" + orderInt.toString() + ")'>Delete</button</td></tr>")
+                ordersArr.push({"ordernumber": order.ordernumber, "person": order.person, "productkey": order.productkey, "quantity": order.quantity, "email": order.email, "notes": order.notes});
+            }
+            
+            orders.forEach(element => {
+                addOrderToHTML(element);
+                orderInt += 1;
+            }) 
+         };
+        }
+
+        function showProductsAdmin(){
+            $("#orderproductdiv").empty();
+            $("#addbuttondiv").append("<button type='button' class='btn btn-success' onclick='addProduct()' data-toggle='modal' data-target='#addModal'>Add product</button>");
+            $("#orderproductdiv").append("<div class='producttableadmin'><table class='table'><thead class='thead-dark'><tr><th scope='col'>Produkt</th><th scope='col'>Antal i lager</th><th scope='col'>Pris per produkt</th><th scope='col'>Beskrivning</th></tr></thead><tbody id='addProducts'></tbody></table></div>");
+            
+            addProducts();
+        }
+        
+        function showOrdersAdmin(){
+            $("#orderproductdiv").empty();
+            $("#addbuttondiv").empty();
+            $("#orderproductdiv").append("<div class='ordertableadmin'><table class='table'><thead class='thead-dark'><tr><th scope='col'>Ordernummer</th><th scope='col'>Person</th><th scope='col'>Produkter</th><th scope='col'>Antal</th><th scope='col'>Email</th><th scope='col'>Beskrivning</th></tr></thead><tbody id='addOrders'></tbody></table></div>");
+            addOrders();
+        }
+        
+        function deleteProduct(productNumber){
+            console.log(productsArr[productNumber].productkey);
+            var fetchString = "https://gg71nquqt8.execute-api.us-east-1.amazonaws.com/prod/productsLambdaReal?type=DELETE&productkey=" +  productsArr[productNumber].productkey
+            console.log(fetchString);
+            fetch(fetchString).then(response => response.text()).then(contents => {
+                
+                var contentsParse = JSON.parse(contents);
+                
+                console.log(JSON.parse(contentsParse.body));
+                console.log("delete product");
+            });
+            location.reload();
+        }
+        
+        function deleteOrder(orderNumber){
+            console.log(ordersArr[orderNumber].ordernumber);
+            var fetchString = "https://81hj82pdmk.execute-api.us-east-1.amazonaws.com/prod/ordersLambdaReal?type=DELETE&ordernumber=" +  ordersArr[orderNumber].ordernumber
+            console.log(fetchString);
+            fetch(fetchString).then(response => response.text()).then(contents => {
+                
+                var contentsParse = JSON.parse(contents);
+                
+                console.log(JSON.parse(contentsParse.body));
+                console.log("delete order");
+            });
+            location.reload();
+        }
+        
+        var productToBePatched;
+        
+        
+        function patchProduct(productNumber){
+            productToBePatched = productsArr[productNumber];
+        }
+        
+        
+        
+        $("#savequantity").click(function(){
+                var newQuantity = $("#inputquantity").val();
+                var fetchString = "https://gg71nquqt8.execute-api.us-east-1.amazonaws.com/prod/productsLambdaReal?type=PATCH&productkey=" + productToBePatched.productkey + "&quantity=" + newQuantity.toString();
+
+                fetch(fetchString).then(response => response.text()).then(contents => {
+                    var parse = JSON.parse(contents);
+                    $("#productPatchedReturn").html(parse.body);
+                });
+            });
+        
+        $("#closePatched").click(function(){
+            location.reload();
+        });
+        $("#closeAdded").click(function(){
+            location.reload();
+        });
+        
+        function addProduct(){
+            
+        };
+        
+        $("#savenewproduct").click(function(){
+            var productkey = $("#inputproductkey").val();
+            var notes = $("#inputnotes").val();
+            var price = $("#inputprice").val();
+            var productname = $("#inputproductname").val();
+            var quantity = $("#inputantal").val();
+            
+            var fetchString = "https://gg71nquqt8.execute-api.us-east-1.amazonaws.com/prod/productsLambdaReal?type=POST&productkey=" + productkey + "&productname=" + productname + "&notes=" + notes + "&quantity=" + quantity.toString() + "&price=" + price.toString();
+            
+            fetch(fetchString).then(response => response.text()).then(contents => {
+                var parse = JSON.parse(contents);
+                $("#productAddedReturn").html(parse.body);
+            });
+         });
+    
+       /* <div class='producttableadmin'>
+        <table class='table'>
+            <thead class='thead-dark'>
+                <tr>
+                    <th scope='col'>Produkt</th>
+                    <th scope='col'>Antal i lager</th>
+                    <th scope='col'>Pris per produkt</th>
+                    <th scope='col'>Beskrivning</th></tr>
+            </thead>
+            <tbody id='addProducts'>
+            </tbody>
+        </table>
+    </div>
+    
+    
+    <div id='functionbuttons'>
+        <button type='button' class='btn btn-warning' id='patchbutton'>Patch</button>
+        <button type='button' class='btn btn-danger' id='deletebutton'>Delete</button><button type='button' class='btn btn-success' id='addbutton'>Add</button>
+    </div>*/
+    </script>
+    
+</html>
