@@ -182,6 +182,7 @@
             var queryStringQuantity = "#selectquantity" + i.toString();
             var product = $(queryStringProduct).val();
             var quantity = $(queryStringQuantity).val();
+            console.log(receiptTotalCost);
             if (product != undefined && quantity != undefined){
                 products.forEach(element => {
                    if (element.productname == product){
