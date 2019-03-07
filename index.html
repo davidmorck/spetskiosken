@@ -1,35 +1,61 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Kiosken</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
     <script src="main.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
-  <a class="navbar-brand" href="#">Spetskiosken</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="orders.html">Beställning</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="products.html">Produkter</a>
-      </li>
-      
-      
-    </ul>
-  </div>
-</nav>
+
     
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
+            <a class="navbar-brand" href="#">Spetskiosken</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="orders.html">Beställning</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="products.html">Produkter</a>
+                </li>
+                
+                
+              </ul>
+            </div>
+      </nav>
+
+    
+                  
+
+
+
+    <div id="middle">
+
+        <h1 id="titlemiidle" class="text-center">Välkommen till Spetskiosken</h1>
+        
+        <ol id="textmiddle" class="text-center">
+          <li class="d-flex justify-content-center">1. Klicka på beställning</li>
+          <li class="d-flex justify-content-center">2. Välj vara och hur många av den du vill ha</li>
+          <li class="d-flex justify-content-center">3. Klicka på "gå vidare" och ange ditt namn och epostadress</li>
+          <li class="d-flex justify-content-center">4. Kolla din epost för bekräftelse och vidare instruktioner</li>
+        </ol>
+        <div class="d-flex justify-content-center">
+          <a href="orders.html"><button type="button" id="startshop" class="btn btn-primary btn-lg d-flex justify-content-center">Börja handla! </button></a>
+        </div>
+    </div>
+    
+  
+
+
+
     
 </body>
 </html>

@@ -111,3 +111,14 @@
     margin-top: 4%;
     height: 300px;
 }
+#middle{
+    width: 100%;
+    margin-top: 15%;
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+    align-items: center;
+    
+       
+}
+#startshop{
+    align-self: 'center';
+}
