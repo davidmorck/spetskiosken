@@ -60,12 +60,12 @@
       <tr id="product1">
       <th scope="row">
         <div class="form-group">
-            <select class="form-control" id="selectproduct1" onChange="determinePrice(1)">
+            <select class="form-control" id="selectproduct1" onChange="determinePrice(1); resetInputNumber(1)">
             </select>
         </div>
       </th>
       <td>
-        <input class="form-control" type="number" value="1" id="selectquantity1" onChange="determinePrice(1); resetInputNumber(1)" min="1" max="100">
+        <input class="form-control" type="number" value="1" id="selectquantity1" onChange="determinePrice(1)" min="1" max="100">
       </td>
       <td>   
         <p id="totalcostproduct1">
