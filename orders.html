@@ -65,7 +65,7 @@
         </div>
       </th>
       <td>
-        <input class="form-control" type="number" value="1" id="selectquantity1" onChange="determinePrice(1)" min="1" max="100">
+        <input class="form-control" type="number" value="1" id="selectquantity1" onChange="determinePrice(1); resetInputNumber(1)" min="1" max="100">
       </td>
       <td>   
         <p id="totalcostproduct1">
@@ -163,7 +163,7 @@
 
     $("#addproduct").click(function(){
        productInt += 1;
-       $("#orderproduct").append("<tr id='product" + productInt.toString() + "'><th scope='row'><div class='form-group'><select class='form-control' id='selectproduct" + productInt.toString() + "' onchange='determinePrice(" + productInt.toString() + ")'>" + productsAppendString + "</select></div></th><td><input class='form-control' onchange='determinePrice(" + productInt.toString() + ")' type='number' min='1' max='100' value='1' id='selectquantity" + productInt.toString() + "'></td><td>   <p id='totalcostproduct" + productInt.toString() + "'></p>   </td><td>   <button type='button' class='btn btn-danger'  onclick='deleteProduct(" + productInt.toString() + ")'>Ta bort</button></td></tr>");
+       $("#orderproduct").append("<tr id='product" + productInt.toString() + "'><th scope='row'><div class='form-group'><select class='form-control' id='selectproduct" + productInt.toString() + "' onchange='determinePrice(" + productInt.toString() + "); resetNumberInput(" + productInt.toString() + ")'>" + productsAppendString + "</select></div></th><td><input class='form-control' onchange='determinePrice(" + productInt.toString() + ")' type='number' min='1' max='100' value='1' id='selectquantity" + productInt.toString() + "'></td><td>   <p id='totalcostproduct" + productInt.toString() + "'></p>   </td><td>   <button type='button' class='btn btn-danger'  onclick='deleteProduct(" + productInt.toString() + ")'>Ta bort</button></td></tr>");
         determinePrice(productInt);
     });
     
@@ -254,6 +254,11 @@
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+    
+    function resetNumberInput(index){
+        var quantitystring = "#selectquantity" + index.toString();
+        $(quantitystring).val(1);
+    }
     
     function determinePrice(index, product){
         if (product == undefined){
