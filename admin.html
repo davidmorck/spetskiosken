@@ -196,8 +196,6 @@
         
             })
             /*.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))*/
-
-
          function main(products){
             console.log(products);
             productInt = 0;
@@ -226,15 +224,13 @@
         
             })
             /*.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))*/
-
-
          function main(orders){
             console.log(orders);
             orderInt = 0;
             
             function addOrderToHTML(order){
-                $("#addOrders").append("<tr id=order" + orderInt.toString() + "> <th scope='row''>" + order.ordernumber + "</th><td>" + order.person + "</td><td>" +order.productkey + "</td><td>" + order.quantity + "</td><td>" + order.email + "</td><td>" + order.notes + "</td><td><button type='button' class='btn btn-danger' onclick='deleteOrder(" + orderInt.toString() + ")'>Delete</button</td></tr>")
-                ordersArr.push({"ordernumber": order.ordernumber, "person": order.person, "productkey": order.productkey, "quantity": order.quantity, "email": order.email, "notes": order.notes});
+                $("#addOrders").append("<tr id=order" + orderInt.toString() + "> <th scope='row''>" + order.ordernumber + "</th><td>" + order.person + "</td><td>" +order.productkey + "</td><td>" + order.quantity + "</td><td>" + order.email + "</td><td>" + order.notes + "</td><td>" + order.group + "</td><td><button type='button' class='btn btn-danger' onclick='deleteOrder(" + orderInt.toString() + ")'>Delete</button</td></tr>")
+                ordersArr.push({"ordernumber": order.ordernumber, "person": order.person, "productkey": order.productkey, "quantity": order.quantity, "email": order.email, "notes": order.notes, "group": order.group});
             }
             
             orders.forEach(element => {
@@ -243,7 +239,6 @@
             }) 
          };
         }
-
         function showProductsAdmin(){
             $("#orderproductdiv").empty();
             $("#addbuttondiv").append("<button type='button' class='btn btn-success' onclick='addProduct()' data-toggle='modal' data-target='#addModal'>Add product</button>");
@@ -255,7 +250,7 @@
         function showOrdersAdmin(){
             $("#orderproductdiv").empty();
             $("#addbuttondiv").empty();
-            $("#orderproductdiv").append("<div class='ordertableadmin'><table class='table'><thead class='thead-dark'><tr><th scope='col'>Ordernummer</th><th scope='col'>Person</th><th scope='col'>Produkter</th><th scope='col'>Antal</th><th scope='col'>Email</th><th scope='col'>Beskrivning</th></tr></thead><tbody id='addOrders'></tbody></table></div>");
+            $("#orderproductdiv").append("<div class='ordertableadmin'><table class='table'><thead class='thead-dark'><tr><th scope='col'>Ordernummer</th><th scope='col'>Person</th><th scope='col'>Produkter</th><th scope='col'>Antal</th><th scope='col'>Email</th><th scope='col'>Beskrivning</th><th scope='col'>Klass</th></tr></thead><tbody id='addOrders'></tbody></table></div>");
             addOrders();
         }
         
@@ -299,7 +294,6 @@
         $("#savequantity").click(function(){
                 var newQuantity = $("#inputquantity").val();
                 var fetchString = "https://gg71nquqt8.execute-api.us-east-1.amazonaws.com/prod/productsLambdaReal?type=PATCH&productkey=" + productToBePatched.productkey + "&quantity=" + newQuantity.toString();
-
                 fetch(fetchString).then(response => response.text()).then(contents => {
                     var parse = JSON.parse(contents);
                     $("#productPatchedReturn").html(parse.body);
@@ -331,26 +325,6 @@
                 $("#productAddedReturn").html(parse.body);
             });
          });
-    
-       /* <div class='producttableadmin'>
-        <table class='table'>
-            <thead class='thead-dark'>
-                <tr>
-                    <th scope='col'>Produkt</th>
-                    <th scope='col'>Antal i lager</th>
-                    <th scope='col'>Pris per produkt</th>
-                    <th scope='col'>Beskrivning</th></tr>
-            </thead>
-            <tbody id='addProducts'>
-            </tbody>
-        </table>
-    </div>
-    
-    
-    <div id='functionbuttons'>
-        <button type='button' class='btn btn-warning' id='patchbutton'>Patch</button>
-        <button type='button' class='btn btn-danger' id='deletebutton'>Delete</button><button type='button' class='btn btn-success' id='addbutton'>Add</button>
-    </div>*/
     </script>
     
 </html>
