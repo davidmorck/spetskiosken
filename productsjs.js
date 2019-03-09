@@ -1,4 +1,4 @@
-const proxyurl = "https://cors-anywhere.herokuapp.com/";
+
         const url = "https://gg71nquqt8.execute-api.us-east-1.amazonaws.com/prod/productsLambdaReal?type=GET"; // site that doesn’t send Access-Control-*
         fetch(url) // https://cors-anywhere.herokuapp.com/https://example.com
             .then(response => response.text())
