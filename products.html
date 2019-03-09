@@ -14,33 +14,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
-    <script>
-         const url = "https://gg71nquqt8.execute-api.us-east-1.amazonaws.com/prod/productsLambdaReal?type=GET"; // site that doesn’t send Access-Control-*
-        fetch(url) // https://cors-anywhere.herokuapp.com/https://example.com
-            .then(response => response.text())
-            .then(contents => {
-            
-            var productParse = JSON.parse(contents);
-            
-            main((JSON.parse(productParse.body)).Items)
-        
-        })
-
-
-        function main(products){
-            console.log(products);
-            
-            function addProductToHTML(product){
-                $("#addProducts").append("<tr> <th scope='row''>" + product.productname + "</th><td>" + product.quantity + "</td><td>" + product.price + " kr</td><td>" + product.notes + "</td></tr>")
-            }
-            
-            products.forEach(element => {
-                addProductToHTML(element);
-            })
-            
-            
-        };
-    </script>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
   <a class="navbar-brand" href="index.html" >Spetskiosken</a>
