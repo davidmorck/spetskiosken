@@ -153,6 +153,8 @@
     
     var products;
     
+    var numberOfProducts = 1;
+    
     var receiptTotalCost = 0;
     
     var receiptProducts = "";
@@ -169,8 +171,7 @@
                     
                 
                 products.forEach(element =>{
-            productsAppendString += "<option>" + element.productname + "</option>";
-            
+                        productsAppendString += "<option>" + element.productname + "</option>";
         });
         determinePrice(1, products[0].productname);
         $("#selectproduct1").append(productsAppendString);
@@ -181,12 +182,14 @@
         var productInt = 1;
     $("#addproduct").click(function(){
        productInt += 1;
+        numberOfProducts += 1;
        $("#orderproduct").append("<tr id='product" + productInt.toString() + "'><th scope='row'><div class='form-group'><select class='form-control' id='selectproduct" + productInt.toString() + "' onchange='determinePrice(" + productInt.toString() + "); resetNumberInput(" + productInt.toString() + ")'>" + productsAppendString + "</select></div></th><td><input class='form-control' onchange='determinePrice(" + productInt.toString() + ")' type='number' min='1' max='100' onKeyDown='return false' value='1' id='selectquantity" + productInt.toString() + "'></td><td>   <p id='totalcostproduct" + productInt.toString() + "'></p>   </td><td>   <button type='button' class='btn btn-danger'  onclick='deleteProduct(" + productInt.toString() + ")'>Ta bort</button></td></tr>");
-        determinePrice(productInt);
+       determinePrice(productInt);
     });
     
     function deleteProduct(index){
         var queryString = "#product" + index.toString();
+        numberOfProducts -= 1;
         $(queryString).remove();
     }
     
@@ -195,7 +198,7 @@
     }
     
     $("#moveon").click(function(){
-        for (var i = 1; i < 10; i++){
+        for (var i = 1; i < 100; i++){
             var queryStringProduct = "#selectproduct" + i.toString();
             var queryStringQuantity = "#selectquantity" + i.toString();
             var product = $(queryStringProduct).val();
