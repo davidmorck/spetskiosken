@@ -216,8 +216,8 @@
 
             receiptProducts = receiptProducts.substring(1);
             receiptQuantity = receiptQuantity.substring(1);
-            console.log(receiptProducts);
-            console.log(receiptQuantity);
+            console.log("products", receiptProducts);
+            console.log("quantity", receiptQuantity);
         }
         
         $("#orderreceipt").append("<tr><td><b>Att betala:</b></td><td>" + receiptTotalCost.toString() + " kr</td></tr>")
