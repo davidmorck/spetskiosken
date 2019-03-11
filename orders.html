@@ -200,7 +200,6 @@
             var queryStringQuantity = "#selectquantity" + i.toString();
             var product = $(queryStringProduct).val();
             var quantity = $(queryStringQuantity).val();
-            console.log(receiptTotalCost);
             if (product != undefined && quantity != undefined){
                 products.forEach(element => {
                    if (element.productname == product){
@@ -225,7 +224,6 @@
          var email = $("#inputemail").val();
          var name = $("#inputname").val();
         
-         console.log(receiptProducts, receiptQuantity, email, name);
          var d = new Date();
          var day = d.getDate().toString();
          var hour = d.getHours().toString();
@@ -233,7 +231,6 @@
          var second = d.getSeconds().toString();
          
          var ordernumber = day + hour + minute + second;
-         console.log(ordernumber);
         
         var url = "https://81hj82pdmk.execute-api.us-east-1.amazonaws.com/prod/ordersLambdaReal?type=POST&ordernumber=" + ordernumber.toString() + "&productkey=" + receiptProducts.toString() + "&notes=undefined&quantity=" + receiptQuantity.toString() + "&person=" + name + "&email=" + email + "&totalcost=" + receiptTotalCost.toString() + "&group=" + group.toString();
         
@@ -243,7 +240,6 @@
              alert("Ange ditt namn.")
          } else {
              fetch(url) .then(response => response.text()).then(contents => {
-                 console.log(JSON.parse(contents));
                  
              })
              
@@ -286,7 +282,6 @@
                     price = element.price;
                 }
             })
-        console.log(price);
         $(totalcostquery).empty();
         $(totalcostquery).append("<p>" + price.toString() + " kr</p>");
     }
