@@ -277,6 +277,8 @@
     function resetNumberInput(index){
         var quantitystring = "#selectquantity" + index.toString();
         var totalcostquery = "#totalcostproduct" + index.toString();
+        var productstring = "#selectproduct" + index.toString();
+            var selectedproduct = $(productstring).val();
         $(quantitystring).val(1);
         var price;
             products.forEach(element => {
