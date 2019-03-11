@@ -286,7 +286,8 @@
                     price = element.price;
                 }
             })
-        $(totalcostquery).remove();
+        console.log(price);
+        $(totalcostquery).empty();
         $(totalcostquery).append("<p>" + price.toString() + " kr</p>");
     }
     
