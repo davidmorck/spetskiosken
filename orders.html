@@ -276,7 +276,16 @@
     
     function resetNumberInput(index){
         var quantitystring = "#selectquantity" + index.toString();
+        var totalcostquery = "#totalcostproduct" + index.toString();
         $(quantitystring).val(1);
+        var price;
+            products.forEach(element => {
+                if (element.productname == selectedproduct){
+                    price = element.price;
+                }
+            })
+        $(totalcostquery).remove();
+        $(totalcostquery).append("<p>" + price.toString() + " kr</p>");
     }
     
     function determinePrice(index, product){
@@ -303,7 +312,7 @@
                 "max": quantity
             });
             
-            $(totalcostquery).
+            
         
             $(totalcostquery).append("<p>" + totalcost.toString() + " kr</p>")
         } else {
