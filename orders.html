@@ -235,6 +235,7 @@
         
         var url = "https://81hj82pdmk.execute-api.us-east-1.amazonaws.com/prod/ordersLambdaReal?type=POST&ordernumber=" + ordernumber.toString() + "&productkey=" + receiptProducts.toString() + "&notes=undefined&quantity=" + receiptQuantity.toString() + "&person=" + name + "&email=" + email + "&totalcost=" + receiptTotalCost.toString() + "&group=" + group.toString();
         
+        console.log(url);
          if (validateEmail(email) == false){
              alert("Ange en giltig email adress.")
          } else if (name == undefined){
