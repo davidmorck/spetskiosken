@@ -214,8 +214,8 @@
                 receiptQuantity += "/" + quantity.toString();
             }
 
-            receiptProducts.substring(1);
-            receiptQuantity.substring(1);
+            receiptProducts = receiptProducts.substring(1);
+            receiptQuantity = receiptQuantity.substring(1);
         }
         
         $("#orderreceipt").append("<tr><td><b>Att betala:</b></td><td>" + receiptTotalCost.toString() + " kr</td></tr>")
