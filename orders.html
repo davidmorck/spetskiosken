@@ -24,6 +24,7 @@
     
     </script>
 <body>
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
   <a class="navbar-brand" href="index.html">Spetskiosken</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +43,7 @@
         
       
 </nav>
-    
+    <div id="entireSite">
     <div class="ordertitle">
         <h1>Lägg en beställning</h1>
   </div>
@@ -144,7 +145,7 @@
     </div>
   </div>
 </div>
-    
+    </div>
     
     
 </body>
@@ -172,7 +173,10 @@
     }
 };
     
-    if (isMobile.Android()) alert("Android");
+    if (isMobile.Android()) {
+        $("#entireSite").empty();
+        $("#entireSite").append("<h3>Gå in på din dator</h3>");
+    }
     alert(isMobile.Android());
     
     var products;
