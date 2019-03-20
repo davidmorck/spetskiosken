@@ -317,7 +317,7 @@
             var productname = $("#inputproductname").val();
             var quantity = $("#inputantal").val();
             
-            var fetchString = "https://gg71nquqt8.execute-api.us-east-1.amazonaws.com/prod/productsLambdaReal?type=POST&productkey=" + productkey + "&productname=" + productname + "&notes=" + notes + "&quantity=" + quantity.toString() + "&price=" + price.toString();
+            var fetchString = "https://gg71nquqt8.execute-api.us-east-1.amazonaws.com/prod/productsLambdaReal?type=POST&productkey=" + productkey + "&productname=" + productname + ""&quantity=" + quantity.toString() + "&price=" + price.toString();
             
             fetch(fetchString).then(response => response.text()).then(contents => {
                 var parse = JSON.parse(contents);
