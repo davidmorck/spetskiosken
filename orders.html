@@ -237,16 +237,16 @@
                    } 
                 });
                 $("#orderreceipt").append("<tr><td>" + product + ":</td><td>" + quantity.toString() + " st</td></tr>")
-                receiptProducts += "/" + product;
-                receiptQuantity += "/" + quantity.toString();
+                receiptProducts += "/" + product.replace(/\s+/g, '');
+                receiptQuantity += "/" + quantity.replace(/\s+/g, '');
             }
 
             
         }
         receiptProducts = receiptProducts.substring(1);
-            receiptQuantity = receiptQuantity.substring(1);
-            console.log("products", receiptProducts);
-            console.log("quantity", receiptQuantity);
+        receiptQuantity = receiptQuantity.substring(1);
+        console.log("products", receiptProducts);
+        console.log("quantity", receiptQuantity);
         $("#orderreceipt").append("<tr><td><b>Att betala:</b></td><td>" + receiptTotalCost.toString() + " kr</td></tr>")
         
     });
@@ -268,7 +268,7 @@
              alert("Ange ditt namn.")
          } else {
              fetch(url) .then(response => response.text()).then(contents => {
-                 
+                 console.log("contents: " + contents.toString());
              })
              
              $("#orderdoneheader").empty();
