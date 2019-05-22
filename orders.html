@@ -256,14 +256,8 @@
          var group = $("#inputgroup").val();
          var email = $("#inputemail").val();
          var name = $("#inputname").val();
-        
-         var d = new Date();
-         var day = d.getDate().toString();
-         var hour = d.getHours().toString();
-         var minute = d.getMinutes().toString();
-         var second = d.getSeconds().toString();
          
-         var ordernumber = day + hour + minute + second;
+         var ordernumber = Math.random(0, 999999999);
         
         var url = "https://81hj82pdmk.execute-api.us-east-1.amazonaws.com/prod/ordersLambdaReal?type=POST&ordernumber=" + ordernumber.toString() + "&productkey=" + receiptProducts.toString() + "&notes=undefined&quantity=" + receiptQuantity.toString() + "&person=" + name + "&email=" + email + "&totalcost=" + receiptTotalCost.toString() + "&group=" + group.toString();
         
